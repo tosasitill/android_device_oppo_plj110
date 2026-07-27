@@ -1,0 +1,25 @@
+# Recovery fstab for OPPO Find X9 PLJ110 / OP5E17L1.
+# Derived from the live vendor ramdisk fstab.mt6993. The device uses
+# dynamic logical partitions, EROFS system partitions, F2FS metadata/userdata,
+# metadata encryption, and has no standalone recovery partition.
+
+system      /system      erofs   ro,slotselect,logical,first_stage_mount
+system_ext  /system_ext  erofs   ro,slotselect,logical,first_stage_mount
+vendor      /vendor      erofs   ro,slotselect,logical,first_stage_mount
+product     /product     erofs   ro,slotselect,logical,first_stage_mount
+odm         /odm         erofs   ro,slotselect,logical,first_stage_mount
+vendor_dlkm /vendor_dlkm erofs   ro,slotselect,logical,first_stage_mount
+odm_dlkm    /odm_dlkm    erofs   ro,slotselect,logical,first_stage_mount
+system_dlkm /system_dlkm erofs   ro,slotselect,logical,first_stage_mount
+
+metadata    /metadata    f2fs    noatime,nosuid,nodev,discard wait,check,formattable
+userdata    /data        f2fs    noatime,nosuid,nodev,discard,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity
+
+/dev/block/by-name/persist       /persist       ext4    noatime,nosuid,nodev wait,check,formattable
+/dev/block/by-name/misc          /misc          emmc    defaults defaults
+/dev/block/by-name/boot          /boot          emmc    defaults slotselect
+/dev/block/by-name/vendor_boot   /vendor_boot   emmc    defaults slotselect
+/dev/block/by-name/dtbo          /dtbo          emmc    defaults slotselect
+/dev/block/by-name/vbmeta        /vbmeta        emmc    defaults slotselect
+/dev/block/by-name/vbmeta_system /vbmeta_system emmc    defaults slotselect
+/dev/block/by-name/vbmeta_vendor /vbmeta_vendor emmc    defaults slotselect

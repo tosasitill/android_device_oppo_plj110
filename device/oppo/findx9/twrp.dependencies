@@ -1,0 +1,4 @@
+# No external dependencies are required for the initial tree.
+# Add the matching kernel and hardware repositories only after their exact
+# branch/commit has been selected.
+[]
