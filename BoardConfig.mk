@@ -47,5 +47,6 @@ TW_INCLUDE_FUSE_EXFAT := true
 TW_USE_TOOLBOX := true
 TW_INPUT_BLACKLIST := hbtp_vm
 
-# There is no standalone recovery by-name partition. Recovery belongs in vendor_boot.
-TARGET_NO_RECOVERY := true
+# There is no standalone recovery by-name partition. Recovery resources are
+# packaged into vendor_boot, but the recovery ramdisk must still be generated.
+TARGET_NO_RECOVERY := false
