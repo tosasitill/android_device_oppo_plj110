@@ -22,7 +22,11 @@ BOARD_VENDOR_BOOTIMAGE_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version 4
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
-BOARD_INCLUDE_RECOVERY_DTBO := true
+# The stock PLJ110 vendor_boot contains a 646,890-byte DTB. Keep this
+# verified DTB in the tree because TWRP's vendor_boot v4 header requires a
+# non-empty DTB when BOARD_INCLUDE_DTB_IN_BOOTIMG is enabled.
+BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 # Exact by-name block sizes from PLJ110 slot _b.
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
