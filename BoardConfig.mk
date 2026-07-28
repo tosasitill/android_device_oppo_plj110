@@ -22,6 +22,10 @@ BOARD_VENDOR_BOOTIMAGE_HEADER_VERSION := 4
 BOARD_MKBOOTIMG_ARGS += --header_version 4
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
+# MT6993 stock vendor_boot v4 has a separate type-2 recovery fragment.
+# Keep TWRP recovery out of the platform fragment and emit that fragment
+# explicitly so bootloader/recovery selection follows the stock layout.
+BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
 # The stock PLJ110 vendor_boot contains a 646,890-byte DTB. Keep this
 # verified DTB in the tree because TWRP's vendor_boot v4 header requires a
 # non-empty DTB when BOARD_INCLUDE_DTB_IN_BOOTIMG is enabled.
